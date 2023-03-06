@@ -20,7 +20,7 @@ function addItem(e) {
     e.preventDefault();
 
     // get input value
-    let newItem = document.getElementById("item").value;
+    let newItem = document.getElementById("item1").value + " " + document.getElementById("item2").value;
 
     // create new li element
     let newLi = document.createElement('li');
@@ -32,9 +32,14 @@ function addItem(e) {
     let delBtn = document.createElement("button");
     delBtn.className = "btn btn-danger btn-sm float-end delete";
     delBtn.appendChild(document.createTextNode('X'));
+    // adding a edit btn to this list item
+    let editBtn = document.createElement("button");
+    editBtn.className = "btn btn-success btn-sm float-end edit";
+    editBtn.appendChild(document.createTextNode('Edit'));
 
     // add delBtn to newLI
     newLi.appendChild(delBtn);
+    newLi.appendChild(editBtn);
 
     // adding newLi to original item List
     items.appendChild(newLi);
@@ -64,7 +69,7 @@ function filterItems(e) {
 
     lists.forEach(item => {
         let itemText = item.firstChild.textContent.toLowerCase();
-        if (itemText.startsWith(searchText)) {
+        if (itemText.includes(searchText)) {
             item.style.display = "block";
         } else {
             item.style.display = "none";
